@@ -1,34 +1,79 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# MarketPlace
+
+> It is a marketplace that is used for NFT owners to sale their assets on this website. they pay 0.2ETH for listing their items on this market place. and it gives a way to track their items.
+
+![screenshot](./assets/market1.png)
+
+Additional description about the project and its features.
+
+## Built With
+
+- Solidity
+- Smart contract
+- Hardhat
+- ether.js
+- infura
+- Next.js
+- Tailwind
+- Css3
+- rinkeby
+- web3Modal
+- axios
+
+## Live Demo
+
+[Live Demo Link](https://mystifying-knuth-91d732.netlify.app)
+
+## Prerequisites
+
+```
+Web Browser
+Meta Mask(google chrome extension)
+```
+
+## Install
+
+```
+$ npm install
+
+```
 
 ## Getting Started
 
-First, run the development server:
+## To get local copy up and running follow these simple example steps
 
-```bash
-npm run dev
-# or
-yarn dev
+```
+git clone git@github.com:Addis-Belete/react-dapp.git
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+```
+cd react-dapp
+```
 
-You can start editing the page by modifying `pages/index.js`. The page auto-updates as you edit the file.
+```
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.js`.
+👤 **Addis Belete**
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- GitHub: [@Addis0943](https://github.com/Addis0943)
+- Twitter: [@Addis32018084](https://twitter.com/Addis32018084)
+- LinkedIn: [LinkedIn](https://www.linkedin.com/in/addis-belete-134b98191/)
 
-## Learn More
+## 🤝 Contributing
 
-To learn more about Next.js, take a look at the following resources:
+Contributions, issues, and feature requests are welcome!
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Feel free to check the [issues page](../../issues/).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+## Show your support
 
-## Deploy on Vercel
+Give a ⭐️ if you like this project!
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Acknowledgments
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+- Thank you to Nadir Dabit for his awesome tutorial
+
+
+## 📝 License
+
+This project is [MIT](./MIT.md) licensed.
+```
