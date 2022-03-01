@@ -9,18 +9,28 @@ contract NFT is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIds;
     address contractAddress;
+    address owner;
 
     constructor(address marketPlaceAddress) ERC721("ADD NFTS", "ADD") {
         contractAddress = marketPlaceAddress;
+        owner = msg.sender;
     }
 
     modifier onlyOwner() {
-        require(msg.sender == owner);
+        require(msg.sender == owner, "Only owner can excute this function ");
         _;
     }
 
-    function createNFT(string memory tokenURI) public returns (uint256) {
+    function createNFT(string memory tokenURI)
+        public
+        onlyOwner
+        returns (uint256)
+    {
         _tokenIds.increment();
         uint256 newItemId = _tokenIds.current();
+        _mint(owner, newItemId);
+        _setTokenURI(newItemId, tokenURI);
+        setApprovalForAll(contractAddress);
+        return newItemId;
     }
 }
