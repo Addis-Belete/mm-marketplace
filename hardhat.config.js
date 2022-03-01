@@ -1,5 +1,5 @@
 require("@nomiclabs/hardhat-waffle");
-
+const projectId = "2175d834e04d481eba6fccf6a5967e12"
 
 module.exports = {
 	solidity: {
@@ -21,9 +21,8 @@ module.exports = {
 			chainId: 1337
 		},
 		rinkeby: {
-			url: "",
-			accounts: "",
-
+			url: `https://rinkeby.infura.io/v3/${projectId}`,
+			accounts: ['0x49cb875fbff7c61e5448ab4d5d777ddc28be363a1df3b84d23340acbfe63d55c'] //Private key of the account
 		}
 
 	},
