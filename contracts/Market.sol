@@ -34,6 +34,10 @@ contract Market is ReentrancyGuard {
         uint256 price,
         bool sold
     );
+    modifier onlyOwner() {
+        require(msg.sender == owner, "Only owner can excute this function ");
+        _;
+    }
 
     function getMarketOwner() public view returns (address) {
         return owner;
@@ -42,20 +46,38 @@ contract Market is ReentrancyGuard {
     // places an item for sale on market place
 
     function createMarketItem(
-        address nftAddress,
+        address nftContract,
         uint256 tokenId,
         uint256 price
-    ) public {
+    ) public onlyOwner {
         require(price > 0, "Price must be atleast 1wei");
         _itemsIds.increment();
         uint256 itemId = _itemsIds.current();
         idToMarketItem[itemId] = MarketItem(
             itemId,
-            nftAddress,
+            nftContract,
             tokenId,
             payable(owner),
             payable(address(0)),
-            price
+            price,
+            false
+        );
+        IERC721(nftContract).transferFrom(msg.sender, address(this), tokenId);
+        emit MarketItemCreated(
+            itemId,
+            nftContract,
+            tokenId,
+            msg.sender,
+            address(0),
+            price,
+            false
         );
     }
+
+    // Sell NFts
+    function sellNFts(address nftContract, uint256 itemId)
+        public
+        payable
+        nonReentrant
+    {}
 }
