@@ -19,7 +19,6 @@ contract Market is ReentrancyGuard {
         uint256 itemId;
         address nftContract;
         uint256 tokenId;
-        address payable seller;
         address payable owner;
         uint256 price;
         bool sold;
@@ -29,7 +28,6 @@ contract Market is ReentrancyGuard {
         uint256 indexed itemId,
         address indexed nftContract,
         uint256 indexed tokenId,
-        address seller,
         address owner,
         uint256 price,
         bool sold
@@ -57,7 +55,6 @@ contract Market is ReentrancyGuard {
             itemId,
             nftContract,
             tokenId,
-            payable(owner),
             payable(address(0)),
             price,
             false
@@ -67,7 +64,6 @@ contract Market is ReentrancyGuard {
             itemId,
             nftContract,
             tokenId,
-            msg.sender,
             address(0),
             price,
             false
@@ -79,5 +75,32 @@ contract Market is ReentrancyGuard {
         public
         payable
         nonReentrant
-    {}
+    {
+        uint256 price = idToMarketItem[itemId].price;
+        uint256 tokenId = idToMarketItem[itemId].tokenId;
+        require(
+            msg.value == price,
+            "Please submit the asking price in order to complete the purchase"
+        );
+        payable(owner).transfer(msg.value);
+        IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
+        idToMarketItem[itemId].owner = msg.sender;
+        idToMarketItem[itemId].sold = true;
+        _itemsSold.increment();
+    }
+
+    function fetchItemsCreated() public view returns (MarketItem[]) {
+        uint256 totalItems = _itemsIds.current();
+        uint256 unSoldItems = totalItems - _itemsSold.current();
+        uint256 currentIndex = 0;
+
+        MarketItem[] memory items = new MarketItem[](unSoldItems);
+        for (uint256 i = 0; i < totalItems; i++) {
+            if (idToMarketItem[i + 1].owner == address(0)) {
+                MarketItem storage currentItem = idToMarketItem[i + 1];
+                items[currentIndex] = currentItem;
+            }
+        }
+        return items;
+    }
 }
