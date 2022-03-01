@@ -38,5 +38,24 @@ contract Market is ReentrancyGuard {
     function getMarketOwner() public view returns (address) {
         return owner;
     }
+
     // places an item for sale on market place
+
+    function createMarketItem(
+        address nftAddress,
+        uint256 tokenId,
+        uint256 price
+    ) public {
+        require(price > 0, "Price must be atleast 1wei");
+        _itemsIds.increment();
+        uint256 itemId = _itemsIds.current();
+        idToMarketItem[itemId] = MarketItem(
+            itemId,
+            nftAddress,
+            tokenId,
+            payable(owner),
+            payable(address(0)),
+            price
+        );
+    }
 }
