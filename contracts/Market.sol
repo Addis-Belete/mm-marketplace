@@ -103,4 +103,23 @@ contract Market is ReentrancyGuard {
         }
         return items;
     }
+
+    function fetchMyNFTs() public view returns (MarketItem[]) {
+        uint256 totalItems = _itemsIds.current();
+        uint256 itemCount = 0;
+        uint256 currentIndex = 0;
+        for (uint256 i = 0; i < totalItems; i++) {
+            if (idToMarketItem[i + 1].owner == msg.sender) {
+                itemCount += 1;
+            }
+        }
+        MarketItem[] memory items = new MarketItem[](itemCount);
+        for (uint256 i = 0; i < totalItems; i++) {
+            if (idToMarketItem[i + 1].owner == msg.sender) {
+                MarketItem storage currentItem = idToMarketItem[i + 1];
+                items[currentIndex] = currentItem;
+            }
+        }
+        return items;
+    }
 }
