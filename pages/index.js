@@ -1,9 +1,8 @@
-import MarketPlace from "../components/MarketPlace"
+import MarketPlace from "../components/MarketPlace";
 export default function Home() {
-	return (
-
-		<div  >
-			<MarketPlace />
-		</div>
-	)
+  return (
+    <div>
+      <MarketPlace />
+    </div>
+  );
 }
