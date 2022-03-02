@@ -8,7 +8,7 @@ import "hardhat/console.sol";
 contract Market is ReentrancyGuard {
     using Counters for Counters.Counter;
     Counters.Counter private _itemsIds;
-    Counter.Counter private _itemsSold;
+    Counters.Counter private _itemsSold;
     address payable owner;
 
     constructor() {
@@ -84,12 +84,12 @@ contract Market is ReentrancyGuard {
         );
         payable(owner).transfer(msg.value);
         IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
-        idToMarketItem[itemId].owner = msg.sender;
+        idToMarketItem[itemId].owner = payable(msg.sender);
         idToMarketItem[itemId].sold = true;
         _itemsSold.increment();
     }
 
-    function fetchItemsCreated() public view returns (MarketItem[]) {
+    function fetchItemsCreated() public view returns (MarketItem[] memory) {
         uint256 totalItems = _itemsIds.current();
         uint256 unSoldItems = totalItems - _itemsSold.current();
         uint256 currentIndex = 0;
@@ -104,7 +104,7 @@ contract Market is ReentrancyGuard {
         return items;
     }
 
-    function fetchMyNFTs() public view returns (MarketItem[]) {
+    function fetchMyNFTs() public view returns (MarketItem[] memory) {
         uint256 totalItems = _itemsIds.current();
         uint256 itemCount = 0;
         uint256 currentIndex = 0;

@@ -10,7 +10,7 @@ contract Greeter {
         console.log("Deploying a Greeter with greeting:", _greeting);
         greeting = _greeting;
     }
-
+ 
     function greet() public view returns (string memory) {
         return greeting;
     }
