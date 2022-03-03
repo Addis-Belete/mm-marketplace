@@ -78,10 +78,12 @@ contract Market is ReentrancyGuard {
     {
         uint256 price = idToMarketItem[itemId].price;
         uint256 tokenId = idToMarketItem[itemId].tokenId;
+        require(msg.sender != owner, "You didnt buy your own NFTs");
         require(
             msg.value == price,
             "Please submit the asking price in order to complete the purchase"
         );
+
         payable(owner).transfer(msg.value);
         IERC721(nftContract).transferFrom(address(this), msg.sender, tokenId);
         idToMarketItem[itemId].owner = payable(msg.sender);
