@@ -71,7 +71,7 @@ contract Market is ReentrancyGuard {
     }
 
     // Sell NFts
-    function sellNFts(address nftContract, uint256 itemId)
+    function sellNFTs(address nftContract, uint256 itemId)
         public
         payable
         nonReentrant

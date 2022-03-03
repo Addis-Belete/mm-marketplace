@@ -27,11 +27,17 @@ describe("NFT ", function () {
 		const nft = await NFT.deploy(market.address);
 		await market.deployed();
 
-		const auctionPrice = ethers.utils.parseUnits('1', 'ether')
+
 
 		// create two tokens
-		expect(await nft.createNFT("https://wwNFTlocation.com"))
-		expect(await nft.createNFT("https://www.mytokenlocation2.com"))
+		await nft.createNFT("https://wwNFTlocation.com")
+		await nft.createNFT("https://www.mytokenlocation2.com")
+
+		// get two address
+		const [owner, add1] = await ethers.getSigner()
+		//create market item
+		await market.connect(owner).createMarketItem(nft.address, 1, "1000")
+		// sell NFTs
 
 	})
 
