@@ -1,6 +1,11 @@
 import { data } from "../data/data";
+import {ether} from 'ethers'
+import Web3Modal from "web3modal"
+
 
 const MarketPlace = () => {
+
+const provider = ethers.provider(window.ethereum);
   return (
     <div className="flex ">
       <div className="flex-1 mr-5 mt-20 px-10">
