@@ -1,6 +1,8 @@
 import Link from "next/link";
-
+import { useState } from "react";
 const NavBar = () => {
+const [connect, setConnect] = useState(true)
+
   return (
     <div className="flex justify-between items-center py-8 px-5">
       <h3 className="text-white text-3xl font-bold">NFT's</h3>
@@ -19,7 +21,7 @@ const NavBar = () => {
         </Link>
       </div>
 
-      <button className="text-white text-lg bg-button-1 py-2 px-10">Connect</button>
+      <button className="text-white text-lg bg-button-1 py-2 px-10">{connect ? "Connected" : "Connect"}</button>
     </div>
   );
 };
