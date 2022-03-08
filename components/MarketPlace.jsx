@@ -1,6 +1,10 @@
 import { data } from "../data/data";
 import { ethers } from "ethers";
-import Web3Modal from "web3modal"
+import axios from "axios";
+import Web3Modal from "web3modal";
+import NFTABI from '../artifacts/contracts/NFT.sol/NFT.json'
+import MarketABI from '../artifacts/contracts/Market.sol/Market.json'
+import { NftContractAddress, MarketContractAddress } from "../config";
 
 
 const MarketPlace = () => {
