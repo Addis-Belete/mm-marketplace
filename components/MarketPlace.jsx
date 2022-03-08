@@ -1,6 +1,7 @@
 import { data } from "../data/data";
 import { ethers } from "ethers";
 import axios from "axios";
+import Web3Modal from "web3modal";
 import { useEffect, useState } from "react";
 
 import NFT from "../artifacts/contracts/NFT.sol/NFT.json";
@@ -34,9 +35,11 @@ function MarketPlace() {
         let price = ethers.utils.formatUnits(i.price.toString());
         let item = {
           price,
+          itemId: i.itemId.toNumber(),
           tokenId: i.tokenId.toNumber(),
           owner: i.owner,
           image: meta.data.image,
+          name: meta.data.name,
           description: meta.data.decription,
         };
         return item;
@@ -46,6 +49,25 @@ function MarketPlace() {
     setNfts(items);
     setLoaded("loaded");
   }
+  const buyNft = async (nft) => {
+    const web3modal = new Web3Modal();
+    const connection = await web3modal.connect();
+    const provider = new ethers.providers.Web3Provider(connection);
+    const signer = new ethers.getSinger(provider);
+    const marketContract = new ethers.Contract(
+      marketContractAddress,
+      Market.abi,
+      signer
+    );
+    let price = ethers.utils.parseUnits(nft.price.toString(), "ether");
+    const transcation = await marketContract.sellNfts(
+      NftContractAddress,
+      nft.itemId,
+      { value: price }
+    );
+    await transcation.wait();
+    loadNFTs();
+  };
   if (loaded == "loading") {
     return (
       <h1 className="text-white text-3xl mx-auto mt-40 w-400px">Loading...</h1>
@@ -81,7 +103,10 @@ function MarketPlace() {
                 <p className="text-white float-right px-2  font-bold">
                   Price {nft.price} ETH
                 </p>
-                <button className="text-white w-full bg-button-1 py-2 text-lg">
+                <button
+                  className="text-white w-full bg-button-1 py-2 text-lg"
+                  onClick={buyNft(nft.itemId)}
+                >
                   Buy
                 </button>
               </div>
