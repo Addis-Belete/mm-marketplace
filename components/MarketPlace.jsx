@@ -1,15 +1,26 @@
 import { data } from "../data/data";
 import { ethers } from "ethers";
 import axios from "axios";
+import {useEffect, useState} from 'react'
 import Web3Modal from "web3modal";
 import NFTABI from '../artifacts/contracts/NFT.sol/NFT.json'
 import MarketABI from '../artifacts/contracts/Market.sol/Market.json'
 import { NftContractAddress, MarketContractAddress } from "../config";
 
 
-const MarketPlace = () => {
+ function MarketPlace() {
 
-const provider = ethers.provider(window.ethereum);
+useEffect(() => {
+	loadNFTs()
+}, [])
+ 
+	 async function loadNFTs() {
+const provider = new ethers.providers.Web3Provider(window.ethereum)
+		 console.log(provider);
+
+	 }
+
+
   return (
     <div className="flex ">
       <div className="flex-1 mr-5 mt-20 px-10">
