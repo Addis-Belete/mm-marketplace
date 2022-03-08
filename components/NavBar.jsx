@@ -1,7 +1,18 @@
+import { use } from "chai";
 import Link from "next/link";
 import { useState } from "react";
+import Web3Modal from 'web3modal'
 const NavBar = () => {
-const [connect, setConnect] = useState(true)
+const [connect, setConnect] = useState(false)
+const [selectedAddress, setSelectedAddress] = useState("")
+const connectToNetwork =async () => {
+const web3Modal = new Web3Modal()
+ const connection = await web3Modal.connect();
+
+setSelectedAddress(connection.selectedAddress)
+setConnect(true)
+
+} 
 
   return (
     <div className="flex justify-between items-center py-8 px-5">
@@ -21,7 +32,7 @@ const [connect, setConnect] = useState(true)
         </Link>
       </div>
 
-      <button className="text-white text-lg bg-button-1 py-2 px-10">{connect ? "Connected" : "Connect"}</button>
+      <button className="text-white text-lg bg-button-1 py-2 px-10" onClick={connectToNetwork}>{connect ? "Disconnect" : "Connect"} {connect && <span className="text-white block text-xs">{selectedAddress}</span>}</button>
     </div>
   );
 };
