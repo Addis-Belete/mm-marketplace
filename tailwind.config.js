@@ -13,7 +13,10 @@ module.exports = {
 				"active-1": "#139CA8",
 			},
 
-			textColor: ['visited', 'active']
+			textColor: ['visited', 'active'],
+			spacing: {
+				"400px": "400px"
+			},
 		},
 	},
 	plugins: [],
