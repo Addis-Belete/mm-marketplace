@@ -15,3 +15,4 @@ npx hardhat help
 ```
 I will start the front end
 Tommorrow
+Dueto crptup project I stopped working on this project. So once crptup project finished I will back to this project and I will finish it.
